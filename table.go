@@ -59,9 +59,6 @@ func (t *Table) waitCustomers() {
 			t.order = generateOrder(t)
 		}
 		syncMutex.Unlock()
-		//addr := (*unsafe.Pointer)(unsafe.Pointer(t.order))
-		//newOrder := unsafe.Pointer(generateOrder(t))
-		//atomic.StorePointer(addr, newOrder)
 		atomic.StoreInt32(&t.ordered, 0)
 		atomic.StoreInt32(&t.occupied, 1)
 		t.statusId = 4
@@ -81,7 +78,7 @@ func (t *Table) stopAvailability() {
 func (t *Table) waitForOrderList() {
 	atomic.StoreInt32(&t.ordered, 1)
 	t.statusId = 3
-	time.Sleep(time.Second * 2) //Wait 2 seconds for the order list to free
+	time.Sleep(time.Second * 3) //Wait 3 seconds for the order list to free
 	atomic.StoreInt32(&t.ordered, 0)
 }
 
