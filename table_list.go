@@ -24,6 +24,15 @@ func (tl *TableList) start() {
 	}
 }
 
+//func (tl *TableList) lookUpForOrder() *Order {
+//	for _, table := range tl.tableList {
+//		if table.available == 1 && table.occupied == 1 && table.ordered == 0 {
+//			return table.order
+//		}
+//	}
+//	return nil
+//}
+
 func (tl *TableList) lookUpTable() *Table {
 	tl.tableMutex.Lock()
 	defer tl.tableMutex.Unlock()
